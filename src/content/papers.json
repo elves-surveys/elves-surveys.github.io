@@ -1,0 +1,54 @@
+[
+  {
+    "id": "elves-main-paper",
+    "title": "[ELVES paper title pending]",
+    "authors": "[Author list pending]",
+    "year": "[Year pending]",
+    "journal": "[Journal/status pending]",
+    "description": "Placeholder entry for the main ELVES survey paper or data-release paper.",
+    "surveys": ["elves"],
+    "adsLink": "[ADS link pending]",
+    "arxivLink": "[arXiv link pending]",
+    "doiLink": "[DOI pending]",
+    "citationNote": "[Citation note pending]"
+  },
+  {
+    "id": "elves-dwarf-main-paper",
+    "title": "[ELVES-Dwarf paper title pending]",
+    "authors": "[Author list pending]",
+    "year": "[Year pending]",
+    "journal": "[Journal/status pending]",
+    "description": "Placeholder entry for the main ELVES-Dwarf survey paper or data-release paper.",
+    "surveys": ["elves-dwarf"],
+    "adsLink": "[ADS link pending]",
+    "arxivLink": "[arXiv link pending]",
+    "doiLink": "[DOI pending]",
+    "citationNote": "[Citation note pending]"
+  },
+  {
+    "id": "elves-field-main-paper",
+    "title": "[ELVES-Field paper title pending]",
+    "authors": "[Author list pending]",
+    "year": "[Year pending]",
+    "journal": "[Journal/status pending]",
+    "description": "Placeholder entry for the main ELVES-Field survey paper or data-release paper.",
+    "surveys": ["elves-field"],
+    "adsLink": "[ADS link pending]",
+    "arxivLink": "[arXiv link pending]",
+    "doiLink": "[DOI pending]",
+    "citationNote": "[Citation note pending]"
+  },
+  {
+    "id": "elves-family-data-release",
+    "title": "[ELVES survey-family data-release paper title pending]",
+    "authors": "[Author list pending]",
+    "year": "[Year pending]",
+    "journal": "[Journal/status pending]",
+    "description": "Placeholder entry for a paper connected to data products across the ELVES survey family.",
+    "surveys": ["elves", "elves-dwarf", "elves-field"],
+    "adsLink": "[ADS link pending]",
+    "arxivLink": "[arXiv link pending]",
+    "doiLink": "[DOI pending]",
+    "citationNote": "[Citation note pending]"
+  }
+]

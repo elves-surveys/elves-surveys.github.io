@@ -1,0 +1,131 @@
+---
+const { products = [] } = Astro.props;
+
+const isUrl = (value) => typeof value === 'string' && /^https?:\/\//.test(value);
+const displayValue = (value, fallback = '[Pending]') => value || fallback;
+---
+
+<section class="data-products" id="data-products" aria-labelledby="data-products-heading">
+  <div class="section-heading">
+    <p class="eyebrow">Public data</p>
+    <h2 id="data-products-heading">Data products</h2>
+    <p>
+      Placeholder releases are listed here so the access pattern is ready before the final files,
+      documentation, and citation text are available.
+    </p>
+  </div>
+
+  {
+    products.length === 0 ? (
+      <p class="muted">[Data products pending]</p>
+    ) : (
+      <>
+        <div class="data-table-wrap" role="region" aria-label="Data products table" tabindex="0">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Release</th>
+                <th scope="col">Description</th>
+                <th scope="col">Format</th>
+                <th scope="col">Access</th>
+                <th scope="col">Citation</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                products.map((product) => (
+                  <tr>
+                    <th scope="row">
+                      <span class="product-name">{displayValue(product.name, '[Product name pending]')}</span>
+                      <span class="product-meta">{displayValue(product.version, '[Version pending]')}</span>
+                      <span class="status-pill">{displayValue(product.status, 'Pending')}</span>
+                    </th>
+                    <td>{displayValue(product.releaseDate, '[Release date pending]')}</td>
+                    <td>{displayValue(product.description, '[Description pending]')}</td>
+                    <td>
+                      <span>{displayValue(product.format, '[Format pending]')}</span>
+                      <span class="product-meta">{displayValue(product.fileSize, '[File size pending]')}</span>
+                    </td>
+                    <td>
+                      <div class="resource-links resource-links--stacked">
+                        {
+                          isUrl(product.downloadLink) ? (
+                            <a href={product.downloadLink}>Download product</a>
+                          ) : (
+                            <span class="pending">{displayValue(product.downloadLink, '[Download link pending]')}</span>
+                          )
+                        }
+                        {
+                          isUrl(product.documentationLink) ? (
+                            <a href={product.documentationLink}>Read documentation</a>
+                          ) : (
+                            <span class="pending">
+                              {displayValue(product.documentationLink, '[Documentation link pending]')}
+                            </span>
+                          )
+                        }
+                      </div>
+                    </td>
+                    <td>{displayValue(product.citation, '[Citation text pending]')}</td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <div class="product-card-list" aria-label="Data products">
+          {
+            products.map((product) => (
+              <article class="product-card">
+                <div class="product-card__header">
+                  <div>
+                    <h3>{displayValue(product.name, '[Product name pending]')}</h3>
+                    <p>{displayValue(product.description, '[Description pending]')}</p>
+                  </div>
+                  <span class="status-pill">{displayValue(product.status, 'Pending')}</span>
+                </div>
+                <dl class="product-details">
+                  <div>
+                    <dt>Version</dt>
+                    <dd>{displayValue(product.version, '[Version pending]')}</dd>
+                  </div>
+                  <div>
+                    <dt>Release date</dt>
+                    <dd>{displayValue(product.releaseDate, '[Release date pending]')}</dd>
+                  </div>
+                  <div>
+                    <dt>Format</dt>
+                    <dd>{displayValue(product.format, '[Format pending]')}</dd>
+                  </div>
+                  <div>
+                    <dt>File size</dt>
+                    <dd>{displayValue(product.fileSize, '[File size pending]')}</dd>
+                  </div>
+                </dl>
+                <div class="resource-links">
+                  {
+                    isUrl(product.downloadLink) ? (
+                      <a href={product.downloadLink}>Download product</a>
+                    ) : (
+                      <span class="pending">{displayValue(product.downloadLink, '[Download link pending]')}</span>
+                    )
+                  }
+                  {
+                    isUrl(product.documentationLink) ? (
+                      <a href={product.documentationLink}>Read documentation</a>
+                    ) : (
+                      <span class="pending">{displayValue(product.documentationLink, '[Documentation link pending]')}</span>
+                    )
+                  }
+                </div>
+                <p class="citation-note">{displayValue(product.citation, '[Citation text pending]')}</p>
+              </article>
+            ))
+          }
+        </div>
+      </>
+    )
+  }
+</section>

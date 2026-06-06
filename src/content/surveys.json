@@ -1,0 +1,77 @@
+[
+  {
+    "slug": "elves",
+    "name": "ELVES",
+    "route": "/elves/",
+    "kicker": "Milky Way-mass hosts",
+    "tagline": "A Local Volume survey of satellites around Milky Way-mass host galaxies.",
+    "description": "ELVES is a survey of satellite systems around Milky Way-mass hosts in the Local Volume.",
+    "hostGalaxyType": "Milky Way-mass host galaxies",
+    "distanceRegime": "Local Volume",
+    "dataReleaseStatus": "[Data release pending]",
+    "overview": [
+      "ELVES targets the satellite populations of Milky Way-mass host galaxies in the Local Volume.",
+      "This page will collect the survey description, associated papers, public catalogs, imaging products, distance measurements, and citation guidance."
+    ],
+    "motivation": [
+      "The survey is intended to support comparisons between satellite populations in nearby Milky Way-mass environments and models of dwarf-galaxy formation.",
+      "Future data releases will document the selection, measurements, and recommended use of the public products."
+    ],
+    "citation": "[Citation text pending]",
+    "contact": {
+      "name": "[Contact name pending]",
+      "email": "[Contact email pending]",
+      "note": "For questions about ELVES data products, contact [Contact pending]."
+    }
+  },
+  {
+    "slug": "elves-dwarf",
+    "name": "ELVES-Dwarf",
+    "route": "/elves-dwarf/",
+    "kicker": "Dwarf hosts",
+    "tagline": "A Local Volume survey of satellites around dwarf host galaxies.",
+    "description": "ELVES-Dwarf is a survey of satellite systems around dwarf hosts in the Local Volume.",
+    "hostGalaxyType": "Dwarf host galaxies",
+    "distanceRegime": "Local Volume",
+    "dataReleaseStatus": "[Data release pending]",
+    "overview": [
+      "ELVES-Dwarf extends the ELVES survey family to satellite systems around dwarf host galaxies in the Local Volume.",
+      "This page will host the survey description, candidate catalogs, distance products, footprint and completeness products, imaging cutouts, papers, and citation guidance."
+    ],
+    "motivation": [
+      "Dwarf-host satellite systems provide a lower-mass comparison point for understanding how satellite populations vary with host mass and environment.",
+      "Future releases will make the selection function, catalog contents, and recommended citation text explicit."
+    ],
+    "citation": "[Citation text pending]",
+    "contact": {
+      "name": "[Contact name pending]",
+      "email": "[Contact email pending]",
+      "note": "For questions about ELVES-Dwarf data products, contact [Contact pending]."
+    }
+  },
+  {
+    "slug": "elves-field",
+    "name": "ELVES-Field",
+    "route": "/elves-field/",
+    "kicker": "Field dwarfs",
+    "tagline": "A Local Volume survey of dwarf galaxies in the field.",
+    "description": "ELVES-Field is a survey of dwarf galaxies in the Local Volume field.",
+    "hostGalaxyType": "Field dwarf galaxies",
+    "distanceRegime": "Local Volume",
+    "dataReleaseStatus": "[Data release pending]",
+    "overview": [
+      "ELVES-Field focuses on dwarf galaxies in the Local Volume field.",
+      "This page will collect the field dwarf catalog, distance measurements, imaging products, papers, data access notes, and citation guidance."
+    ],
+    "motivation": [
+      "Field dwarf galaxies provide an environmental reference for interpreting satellites around more massive and lower-mass hosts.",
+      "Future releases will describe the catalog construction, measurement products, and appropriate citation practices."
+    ],
+    "citation": "[Citation text pending]",
+    "contact": {
+      "name": "[Contact name pending]",
+      "email": "[Contact email pending]",
+      "note": "For questions about ELVES-Field data products, contact [Contact pending]."
+    }
+  }
+]

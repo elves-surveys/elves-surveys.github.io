@@ -1,0 +1,27 @@
+---
+const { surveys = [] } = Astro.props;
+---
+
+<aside class="hero-panel" aria-label="ELVES survey-family summary">
+  <div class="hero-panel__header">
+    <p>Survey routes</p>
+    <strong>3</strong>
+  </div>
+  <div class="hero-panel__list">
+    {
+      surveys.map((survey) => (
+        <a class="hero-panel__row" href={survey.route}>
+          <span>
+            <strong>{survey.name}</strong>
+            <em>{survey.hostGalaxyType}</em>
+          </span>
+          <span>{survey.count} products</span>
+        </a>
+      ))
+    }
+  </div>
+  <div class="hero-panel__footer">
+    <span>Public data structure ready</span>
+    <span>[Releases pending]</span>
+  </div>
+</aside>

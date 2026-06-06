@@ -1,0 +1,104 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import DataProducts from '../components/DataProducts.astro';
+import PaperList from '../components/PaperList.astro';
+import SurveyCard from '../components/SurveyCard.astro';
+import SurveySummaryPanel from '../components/SurveySummaryPanel.astro';
+import surveys from '../content/surveys.json';
+import papers from '../content/papers.json';
+import dataProducts from '../content/data-products.json';
+
+const productCountBySurvey = surveys.map((survey) => ({
+  ...survey,
+  count: dataProducts.filter((product) => product.survey === survey.slug).length
+}));
+---
+
+<BaseLayout
+  title="ELVES Surveys | Local Volume dwarf-galaxy surveys"
+  description="Public portal for ELVES, ELVES-Dwarf, and ELVES-Field survey papers and data products."
+>
+  <section class="hero">
+    <div class="hero__content">
+      <p class="eyebrow">Local Volume dwarf-galaxy surveys</p>
+      <h1>ELVES survey family</h1>
+      <p class="hero__lede">
+        A public portal for three related Local Volume surveys of satellite systems and field dwarf galaxies.
+      </p>
+      <div class="hero__actions">
+        <a class="button" href="#surveys">Browse surveys</a>
+        <a class="button button--secondary" href="#data-products">View data products</a>
+      </div>
+    </div>
+    <SurveySummaryPanel surveys={productCountBySurvey} />
+  </section>
+
+  <section class="page-section" id="surveys" aria-labelledby="surveys-heading">
+    <div class="section-heading">
+      <p class="eyebrow">Survey family</p>
+      <h2 id="surveys-heading">Three Local Volume samples</h2>
+      <p>
+        Each survey page is organized around overview text, science motivation, papers, public data products,
+        citation guidance, and contact information.
+      </p>
+    </div>
+    <div class="survey-grid">
+      {surveys.map((survey) => <SurveyCard survey={survey} />)}
+    </div>
+  </section>
+
+  <section class="page-section page-section--band" aria-labelledby="release-heading">
+    <div class="section-heading">
+      <p class="eyebrow">Data releases</p>
+      <h2 id="release-heading">Release overview</h2>
+      <p>
+        The first version of this site establishes the durable release structure. All file links, sizes,
+        dates, and final citation text remain pending until the data products are ready.
+      </p>
+    </div>
+    <div class="release-grid">
+      {
+        productCountBySurvey.map((survey) => (
+          <article class="release-card">
+            <h3>{survey.name}</h3>
+            <p>{survey.count} placeholder data products</p>
+            <p class="pending">{survey.dataReleaseStatus}</p>
+            <a class="text-link" href={`${survey.route}#data-products`}>Open release table</a>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="page-section" aria-labelledby="papers-heading">
+    <div class="section-heading">
+      <p class="eyebrow">Papers</p>
+      <h2 id="papers-heading">Key papers</h2>
+      <p>
+        Bibliographic entries are placeholders for now. Replace them with verified ADS, arXiv,
+        DOI, and citation information once available.
+      </p>
+    </div>
+    <PaperList papers={papers} />
+  </section>
+
+  <DataProducts products={dataProducts} />
+
+  <section class="page-section page-section--compact" aria-labelledby="contact-heading">
+    <div class="contact-panel">
+      <div>
+        <p class="eyebrow">Citation</p>
+        <h2 id="contact-heading">Contact and citation</h2>
+      </div>
+      <div>
+        <p>
+          If you use data products from these surveys, please cite the relevant survey paper or
+          data-release paper when final citation text is provided.
+        </p>
+        <p class="pending">[Citation text pending]</p>
+        <p class="pending">[Contact information pending]</p>
+        <p><a class="text-link" href="/team/">View the survey team</a></p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

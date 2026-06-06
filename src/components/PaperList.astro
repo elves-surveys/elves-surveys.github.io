@@ -1,0 +1,63 @@
+---
+const { papers = [] } = Astro.props;
+
+const isUrl = (value) => typeof value === 'string' && /^https?:\/\//.test(value);
+const displayValue = (value, fallback = '[Pending]') => value || fallback;
+const surveyLabel = (slug) => {
+  const labels = {
+    elves: 'ELVES',
+    'elves-dwarf': 'ELVES-Dwarf',
+    'elves-field': 'ELVES-Field'
+  };
+  return labels[slug] || slug;
+};
+---
+
+<div class="paper-list">
+  {
+    papers.length === 0 ? (
+      <p class="muted">[Paper entries pending]</p>
+    ) : (
+      papers.map((paper) => (
+        <article class="paper-card">
+          <div class="paper-card__header">
+            <div>
+              <h3>{displayValue(paper.title, '[Paper title pending]')}</h3>
+              <p class="paper-card__authors">{displayValue(paper.authors, '[Author list pending]')}</p>
+            </div>
+            <p class="paper-card__year">{displayValue(paper.year, '[Year pending]')}</p>
+          </div>
+          <p class="paper-card__status">{displayValue(paper.journal, '[Journal/status pending]')}</p>
+          <p>{displayValue(paper.description, '[Short description pending]')}</p>
+          <div class="tag-row" aria-label="Related surveys">
+            {(paper.surveys || []).map((survey) => <span class="tag">{surveyLabel(survey)}</span>)}
+          </div>
+          <div class="resource-links">
+            {
+              isUrl(paper.adsLink) ? (
+                <a href={paper.adsLink}>ADS record</a>
+              ) : (
+                <span class="pending">{displayValue(paper.adsLink, '[ADS link pending]')}</span>
+              )
+            }
+            {
+              isUrl(paper.arxivLink) ? (
+                <a href={paper.arxivLink}>arXiv preprint</a>
+              ) : (
+                <span class="pending">{displayValue(paper.arxivLink, '[arXiv link pending]')}</span>
+              )
+            }
+            {
+              isUrl(paper.doiLink) ? (
+                <a href={paper.doiLink}>DOI record</a>
+              ) : (
+                <span class="pending">{displayValue(paper.doiLink, '[DOI pending]')}</span>
+              )
+            }
+          </div>
+          <p class="citation-note">{displayValue(paper.citationNote, '[Citation note pending]')}</p>
+        </article>
+      ))
+    )
+  }
+</div>

@@ -1,0 +1,111 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import DataProducts from '../../components/DataProducts.astro';
+import PaperList from '../../components/PaperList.astro';
+import surveys from '../../content/surveys.json';
+import papers from '../../content/papers.json';
+import dataProducts from '../../content/data-products.json';
+
+export function getStaticPaths() {
+  return surveys.map((survey) => ({
+    params: { slug: survey.slug },
+    props: { survey }
+  }));
+}
+
+const { survey } = Astro.props;
+const surveyPapers = papers.filter((paper) => paper.surveys?.includes(survey.slug));
+const surveyProducts = dataProducts.filter((product) => product.survey === survey.slug);
+---
+
+<BaseLayout title={`${survey.name} | ELVES Surveys`} description={survey.description}>
+  <section class="hero hero--survey">
+    <div class="hero__content">
+      <p class="eyebrow">{survey.kicker}</p>
+      <h1>{survey.name}</h1>
+      <p class="hero__lede">{survey.tagline}</p>
+      <dl class="hero-meta">
+        <div>
+          <dt>Host type</dt>
+          <dd>{survey.hostGalaxyType}</dd>
+        </div>
+        <div>
+          <dt>Distance regime</dt>
+          <dd>{survey.distanceRegime}</dd>
+        </div>
+        <div>
+          <dt>Data release</dt>
+          <dd class="pending">{survey.dataReleaseStatus}</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="page-section page-section--two-column" aria-labelledby="overview-heading">
+    <div class="section-heading section-heading--sticky">
+      <p class="eyebrow">Overview</p>
+      <h2 id="overview-heading">Survey overview</h2>
+    </div>
+    <div class="prose">
+      {survey.overview.map((paragraph) => <p>{paragraph}</p>)}
+    </div>
+  </section>
+
+  <section class="page-section page-section--two-column page-section--band" aria-labelledby="motivation-heading">
+    <div class="section-heading section-heading--sticky">
+      <p class="eyebrow">Science</p>
+      <h2 id="motivation-heading">Science motivation</h2>
+    </div>
+    <div class="prose">
+      {survey.motivation.map((paragraph) => <p>{paragraph}</p>)}
+    </div>
+  </section>
+
+  <section class="page-section" aria-labelledby="papers-heading">
+    <div class="section-heading">
+      <p class="eyebrow">Papers</p>
+      <h2 id="papers-heading">Papers</h2>
+      <p>
+        Replace these placeholders with verified bibliographic metadata when the relevant papers
+        and links are finalized.
+      </p>
+    </div>
+    <PaperList papers={surveyPapers} />
+  </section>
+
+  <DataProducts products={surveyProducts} />
+
+  <section class="page-section page-section--two-column page-section--band" aria-labelledby="citation-heading">
+    <div class="section-heading section-heading--sticky">
+      <p class="eyebrow">Citation</p>
+      <h2 id="citation-heading">Recommended citation</h2>
+    </div>
+    <div class="prose">
+      <blockquote>{survey.citation}</blockquote>
+      <p>
+        If you use data products from this survey, please cite the relevant survey paper or
+        data-release paper once final citation text is provided.
+      </p>
+    </div>
+  </section>
+
+  <section class="page-section page-section--two-column" aria-labelledby="contact-heading">
+    <div class="section-heading section-heading--sticky">
+      <p class="eyebrow">Contact</p>
+      <h2 id="contact-heading">Contact</h2>
+    </div>
+    <div class="prose">
+      <p>{survey.contact.note}</p>
+      <dl class="contact-list">
+        <div>
+          <dt>Name</dt>
+          <dd class="pending">{survey.contact.name}</dd>
+        </div>
+        <div>
+          <dt>Email</dt>
+          <dd class="pending">{survey.contact.email}</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+</BaseLayout>

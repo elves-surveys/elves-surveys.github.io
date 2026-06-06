@@ -1,0 +1,63 @@
+---
+import '../styles/global.css';
+
+const {
+  title = 'ELVES Surveys',
+  description = 'Public portal for the ELVES family of Local Volume dwarf-galaxy surveys.'
+} = Astro.props;
+
+const navItems = [
+  { href: '/', label: 'Home' },
+  { href: '/elves/', label: 'ELVES' },
+  { href: '/elves-dwarf/', label: 'ELVES-Dwarf' },
+  { href: '/elves-field/', label: 'ELVES-Field' },
+  { href: '/team/', label: 'Team' }
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="site-wordmark" href="/" aria-label="ELVES Surveys home">
+          <span class="site-wordmark__mark" aria-hidden="true"></span>
+          <span>ELVES Surveys</span>
+        </a>
+        <nav class="site-nav" aria-label="Main navigation">
+          {
+            navItems.map((item) => (
+              <a
+                class:list={[
+                  'site-nav__link',
+                  currentPath === item.href && 'site-nav__link--active'
+                ]}
+                href={item.href}
+              >
+                {item.label}
+              </a>
+            ))
+          }
+        </nav>
+      </div>
+    </header>
+    <main id="main-content">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <p>ELVES survey-family public website.</p>
+        <p>[Contact information pending]</p>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+---
+const { member } = Astro.props;
+
+const hasPhoto = typeof member.photoUrl === 'string' && member.photoUrl.length > 0;
+---
+
+<article class="team-card">
+  <div class="team-card__photo" aria-label={member.photoAlt || 'Team member photo pending'}>
+    {
+      hasPhoto ? (
+        <img src={member.photoUrl} alt={member.photoAlt || `${member.name} portrait`} />
+      ) : (
+        <span>Photo pending</span>
+      )
+    }
+  </div>
+  <div class="team-card__body">
+    <div>
+      <p class="team-card__role">{member.role}</p>
+      <h3>{member.name}</h3>
+      <p>{member.institution}</p>
+    </div>
+    <div class="tag-row" aria-label="Survey affiliation">
+      {member.surveys.map((survey) => <span class="tag">{survey}</span>)}
+    </div>
+  </div>
+</article>
