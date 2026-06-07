@@ -23,6 +23,8 @@ const currentPath = Astro.url.pathname;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
   </head>
   <body>
@@ -30,7 +32,14 @@ const currentPath = Astro.url.pathname;
     <header class="site-header">
       <div class="site-header__inner">
         <a class="site-wordmark" href="/" aria-label="ELVES Surveys home">
-          <span class="site-wordmark__mark" aria-hidden="true"></span>
+          <img
+            class="site-wordmark__icon"
+            src="/logos/elves-icon-light.svg"
+            width="80"
+            height="80"
+            alt=""
+            aria-hidden="true"
+          />
           <span>ELVES Surveys</span>
         </a>
         <nav class="site-nav" aria-label="Main navigation">
@@ -55,8 +64,8 @@ const currentPath = Astro.url.pathname;
     </main>
     <footer class="site-footer">
       <div class="site-footer__inner">
-        <p>ELVES survey-family public website.</p>
-        <p>[Contact information pending]</p>
+        <p>The ELVES Surveys Team</p>
+        <p>Built by Jiaxuan Li, 2026</p>
       </div>
     </footer>
   </body>

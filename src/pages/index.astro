@@ -3,71 +3,37 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import DataProducts from '../components/DataProducts.astro';
 import PaperList from '../components/PaperList.astro';
 import SurveyCard from '../components/SurveyCard.astro';
-import SurveySummaryPanel from '../components/SurveySummaryPanel.astro';
 import surveys from '../content/surveys.json';
 import papers from '../content/papers.json';
 import dataProducts from '../content/data-products.json';
-
-const productCountBySurvey = surveys.map((survey) => ({
-  ...survey,
-  count: dataProducts.filter((product) => product.survey === survey.slug).length
-}));
 ---
 
 <BaseLayout
   title="ELVES Surveys"
   description="Public portal for ELVES, ELVES-Dwarf, and ELVES-Field survey papers and data products."
 >
-  <section class="hero">
-    <div class="hero__content">
-    <p class="eyebrow">Exploration of Local VolumE Surveys (ELVES)</p>
-      <h1 style="font-size: 4em; max-width: 20ch;">The <span style="font-family: san-serif;">ELVES</span> Surveys</h1>
+  <section class="hero hero--home">
+    <div class="hero__content hero__content--compact">
+      <p class="eyebrow">Exploration of Local VolumE Surveys (ELVES)</p>
+      <h1 style="font-size: 4em; max-width: 20ch;">The <span style="font-family: sans-serif;">ELVES</span> Surveys</h1>
       <p class="hero__lede" style="font-size: 0.95rem;">
         Exploration of Local VolumE Surveys (ELVES) is a coordinated family of surveys characterizing the dwarf-galaxy populations around
-        Milky Way analogs (<em>ELVES</em>), arund dwarf hosts (<em>ELVES-Dwarf</em>), and in the field (<em>ELVES-Field</em>). 
+        Milky Way analogs (<em>ELVES</em>), around dwarf hosts (<em>ELVES-Dwarf</em>), and in the field (<em>ELVES-Field</em>). 
       </p>
       <div class="hero__actions">
         <a class="button" href="#surveys">Browse surveys</a>
         <a class="button button--secondary" href="#data-products">View data products</a>
       </div>
     </div>
-    <SurveySummaryPanel surveys={productCountBySurvey} />
   </section>
 
   <section class="page-section" id="surveys" aria-labelledby="surveys-heading">
     <div class="section-heading">
       <p class="eyebrow">Survey family</p>
-      <h2 id="surveys-heading">Three Local Volume samples</h2>
-      <p>
-        Each survey page is organized around overview text, science motivation, papers, public data products,
-        citation guidance, and contact information.
-      </p>
+      <h2 id="surveys-heading">Three Local Volume Samples of Dwarf Galaxies</h2>
     </div>
     <div class="survey-grid">
       {surveys.map((survey) => <SurveyCard survey={survey} />)}
-    </div>
-  </section>
-
-  <section class="page-section page-section--band" aria-labelledby="release-heading">
-    <div class="section-heading">
-      <p class="eyebrow">Data releases</p>
-      <h2 id="release-heading">Release overview</h2>
-      <p>
-        The first version of this site establishes the durable release structure. All file links, sizes,
-        dates, and final citation text remain pending until the data products are ready.
-      </p>
-    </div>
-    <div class="release-grid">
-      {
-        productCountBySurvey.map((survey) => (
-          <article class="release-card">
-            <h3>{survey.name}</h3>
-            <p>{survey.count} placeholder data products</p>
-            <p class="pending">{survey.dataReleaseStatus}</p>
-            <a class="text-link" href={`${survey.route}#data-products`}>Open release table</a>
-          </article>
-        ))
-      }
     </div>
   </section>
 
@@ -75,31 +41,86 @@ const productCountBySurvey = surveys.map((survey) => ({
     <div class="section-heading">
       <p class="eyebrow">Papers</p>
       <h2 id="papers-heading">Key papers</h2>
-      <p>
-        Bibliographic entries are placeholders for now. Replace them with verified ADS, arXiv,
-        DOI, and citation information once available.
-      </p>
     </div>
-    <PaperList papers={papers} />
+    <PaperList papers={papers} filterable />
   </section>
 
   <DataProducts products={dataProducts} />
 
   <section class="page-section page-section--compact" aria-labelledby="contact-heading">
     <div class="contact-panel">
-      <div>
+      <div class="contact-panel__heading">
         <p class="eyebrow">Citation</p>
         <h2 id="contact-heading">Contact and citation</h2>
       </div>
-      <div>
+      <div class="contact-panel__body">
         <p>
-          If you use data products from these surveys, please cite the relevant survey paper or
-          data-release paper when final citation text is provided.
+          If you use data products from these surveys, please cite the core survey paper and/or relevant science papers. 
+          If you have questions about the data, please contact the survey team via email.
         </p>
-        <p class="pending">[Citation text pending]</p>
-        <p class="pending">[Contact information pending]</p>
-        <p><a class="text-link" href="/team/">View the survey team</a></p>
+        <a class="text-link" href="/team/">View the survey team</a>
       </div>
     </div>
   </section>
+
+  <script>
+    (() => {
+      const counters = Array.from(document.querySelectorAll('[data-countup]'));
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const formatter = new Intl.NumberFormat();
+
+      const setCounterValue = (counter, value) => {
+        counter.textContent = formatter.format(value);
+      };
+
+      const animateCounter = (counter) => {
+        if (counter.dataset.countupDone === 'true') return;
+
+        counter.dataset.countupDone = 'true';
+        const target = Number(counter.dataset.countupTarget || counter.textContent?.replace(/,/g, ''));
+
+        if (!Number.isFinite(target)) return;
+
+        if (reducedMotion) {
+          setCounterValue(counter, target);
+          return;
+        }
+
+        const duration = 1150;
+        const startTime = performance.now();
+
+        const tick = (now) => {
+          const progress = Math.min((now - startTime) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          setCounterValue(counter, Math.round(target * eased));
+
+          if (progress < 1) {
+            requestAnimationFrame(tick);
+          } else {
+            setCounterValue(counter, target);
+          }
+        };
+
+        setCounterValue(counter, 0);
+        requestAnimationFrame(tick);
+      };
+
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              observer.unobserve(entry.target);
+              animateCounter(entry.target);
+            });
+          },
+          { threshold: 0.42 }
+        );
+
+        counters.forEach((counter) => observer.observe(counter));
+      } else {
+        counters.forEach(animateCounter);
+      }
+    })();
+  </script>
 </BaseLayout>

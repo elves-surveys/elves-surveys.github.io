@@ -10,8 +10,7 @@ const displayValue = (value, fallback = '[Pending]') => value || fallback;
     <p class="eyebrow">Public data</p>
     <h2 id="data-products-heading">Data products</h2>
     <p>
-      Placeholder releases are listed here so the access pattern is ready before the final files,
-      documentation, and citation text are available.
+      If you use data products from this survey, please cite the core survey paper and/or relevant science papers. 
     </p>
   </div>
 
@@ -51,14 +50,14 @@ const displayValue = (value, fallback = '[Pending]') => value || fallback;
                       <div class="resource-links resource-links--stacked">
                         {
                           isUrl(product.downloadLink) ? (
-                            <a href={product.downloadLink}>Download product</a>
+                            <a href={product.downloadLink} target="_blank" rel="noopener noreferrer">Download product</a>
                           ) : (
                             <span class="pending">{displayValue(product.downloadLink, '[Download link pending]')}</span>
                           )
                         }
                         {
                           isUrl(product.documentationLink) ? (
-                            <a href={product.documentationLink}>Read documentation</a>
+                            <a href={product.documentationLink} target="_blank" rel="noopener noreferrer">Read documentation</a>
                           ) : (
                             <span class="pending">
                               {displayValue(product.documentationLink, '[Documentation link pending]')}
@@ -107,14 +106,14 @@ const displayValue = (value, fallback = '[Pending]') => value || fallback;
                 <div class="resource-links">
                   {
                     isUrl(product.downloadLink) ? (
-                      <a href={product.downloadLink}>Download product</a>
+                      <a href={product.downloadLink} target="_blank" rel="noopener noreferrer">Download product</a>
                     ) : (
                       <span class="pending">{displayValue(product.downloadLink, '[Download link pending]')}</span>
                     )
                   }
                   {
                     isUrl(product.documentationLink) ? (
-                      <a href={product.documentationLink}>Read documentation</a>
+                      <a href={product.documentationLink} target="_blank" rel="noopener noreferrer">Read documentation</a>
                     ) : (
                       <span class="pending">{displayValue(product.documentationLink, '[Documentation link pending]')}</span>
                     )

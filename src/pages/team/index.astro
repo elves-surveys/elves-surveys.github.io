@@ -2,49 +2,60 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import TeamMemberCard from '../../components/TeamMemberCard.astro';
 import team from '../../content/team.json';
+
+const coreMembers = team.filter((member) => member.memberType !== 'collaborator');
+const collaborators = team.filter((member) => member.memberType === 'collaborator');
+const hasCollaborators = collaborators.length > 0;
 ---
 
 <BaseLayout
   title="Team | ELVES Surveys"
   description="Core members of the ELVES survey family."
 >
-  <section class="hero hero--survey">
-    <div class="hero__content">
-      <p class="eyebrow">Survey team</p>
-      <h1>Team</h1>
-      <p class="hero__lede">
-        Core members of the ELVES, ELVES-Dwarf, and ELVES-Field survey family.
-      </p>
-    </div>
-  </section>
 
-  <section class="page-section" aria-labelledby="core-team-heading">
+  <section class="page-section page-section--after-compact-hero" aria-labelledby="core-team-heading">
     <div class="section-heading">
-      <p class="eyebrow">Core members</p>
-      <h2 id="core-team-heading">People and institutions</h2>
-      <p>
-        This page is ready for verified member names, institutions, roles, and portrait images.
-        Placeholder cards are shown until those details are added.
-      </p>
+    <p class="eyebrow">Survey team</p>
+      <h2 id="core-team-heading">Core Members</h2>
     </div>
     <div class="team-grid">
-      {team.map((member) => <TeamMemberCard member={member} />)}
+      {coreMembers.map((member) => <TeamMemberCard member={member} />)}
     </div>
   </section>
 
-  <section class="page-section page-section--compact page-section--band" aria-labelledby="team-update-heading">
-    <div class="contact-panel">
-      <div>
-        <p class="eyebrow">Updates</p>
-        <h2 id="team-update-heading">Maintaining this page</h2>
-      </div>
-      <div>
-        <p>
-          Add or revise team entries in <code>src/content/team.json</code>. Portrait images can be
-          stored in <code>public/team/</code> and referenced as <code>/team/photo-name.jpg</code>.
-        </p>
-        <p class="pending">[Team contact pending]</p>
-      </div>
-    </div>
-  </section>
+  {
+    hasCollaborators && (
+      <section class="page-section page-section--compact page-section--band" aria-labelledby="collaborators-heading">
+        <div class="collaborator-panel">
+          <div class="section-heading">
+            <p class="eyebrow">Collaborators</p>
+            <h2 id="collaborators-heading">Collaborators also include</h2>
+          </div>
+          <div class="collaborator-list">
+            {
+              collaborators.map((person) => (
+                <article class="collaborator-item">
+                  <h3>
+                    {
+                      person.url ? (
+                        <a href={person.url} target="_blank" rel="noopener noreferrer">{person.name}</a>
+                      ) : (
+                        person.name
+                      )
+                    }
+                  </h3>
+                  {person.institution && <p>{person.institution}</p>}
+                  {
+                    person.email && (
+                      <a class="collaborator-item__email" href={`mailto:${person.email}`}>{person.email}</a>
+                    )
+                  }
+                </article>
+              ))
+            }
+          </div>
+        </div>
+      </section>
+    )
+  }
 </BaseLayout>

@@ -1,50 +1,85 @@
 [
   {
-    "name": "[Core member name pending]",
-    "role": "[Role pending]",
-    "institution": "[Institution pending]",
-    "surveys": ["ELVES"],
-    "photoUrl": "",
-    "photoAlt": "[Photo pending]"
+    "name": "Jenny Greene",
+    "memberType": "core",
+    "institution": "Princeton University",
+    "url": "https://web.astro.princeton.edu/people/jenny-greene",
+    "photoUrl": "/team/jenny_greene.jpg",
+    "photoAlt": "Jenny Greene",
+    "email": "jgreene@astro.princeton.edu"
   },
   {
-    "name": "[Core member name pending]",
-    "role": "[Role pending]",
-    "institution": "[Institution pending]",
-    "surveys": ["ELVES"],
-    "photoUrl": "",
-    "photoAlt": "[Photo pending]"
+    "name": "Scott Carlsten",
+    "memberType": "core",
+    "institution": "Princeton University",
+    "url": "https://www.linkedin.com/in/scott-carlsten-ba3481214/",
+    "photoUrl": "/team/scott_carlsten.jpg",
+    "photoAlt": "Scott Carlsten",
+    "email": "scarlsten@gmail.com"
   },
   {
-    "name": "[Core member name pending]",
-    "role": "[Role pending]",
-    "institution": "[Institution pending]",
-    "surveys": ["ELVES-Dwarf"],
-    "photoUrl": "",
-    "photoAlt": "[Photo pending]"
+    "name": "Jiaxuan Li",
+    "memberType": "core",
+    "institution": "Princeton University",
+    "url": "https://jiaxuanli.me",
+    "photoUrl": "/team/jiaxuan_li.jpg",
+    "photoAlt": "Jiaxuan Li",
+    "email": "jiaxuanl@princeton.edu"
   },
   {
-    "name": "[Core member name pending]",
-    "role": "[Role pending]",
-    "institution": "[Institution pending]",
-    "surveys": ["ELVES-Dwarf"],
-    "photoUrl": "",
-    "photoAlt": "[Photo pending]"
+    "name": "Shany Danieli",
+    "memberType": "core",
+    "institution": "Tel Aviv University",
+    "url": "https://www.shanydanieli.com/",
+    "photoUrl": "/team/shany_danieli.jpg",
+    "photoAlt": "Shany Danieli",
+    "email": "sdanieli@tauex.tau.ac.il"
   },
   {
-    "name": "[Core member name pending]",
-    "role": "[Role pending]",
-    "institution": "[Institution pending]",
-    "surveys": ["ELVES-Field"],
-    "photoUrl": "",
-    "photoAlt": "[Photo pending]"
+    "name": "Marla Geha",
+    "memberType": "core",
+    "institution": "Yale University",
+    "url": "http://www.astro.yale.edu/mgeha/",
+    "photoUrl": "/team/marla_geha.jpg",
+    "photoAlt": "Marla Geha"
   },
   {
-    "name": "[Core member name pending]",
-    "role": "[Role pending]",
-    "institution": "[Institution pending]",
-    "surveys": ["ELVES-Field"],
-    "photoUrl": "",
-    "photoAlt": "[Photo pending]"
+    "name": "Rachael Beaton",
+    "memberType": "core",
+    "institution": "Space Telescope Science Institute",
+    "url": "https://www.stsci.edu/stsci-research/research-directory/rachael-beaton",
+    "photoUrl": "/team/rachael_beaton.png",
+    "photoAlt": "Rachael Beaton"
+  },
+  {
+    "name": "Alex Drlica-Wagner",
+    "memberType": "core",
+    "institution": "University of Chicago",
+    "url": "https://kadrlica.github.io/",
+    "photoUrl": "/team/alex_drlica_wagner.jpg",
+    "photoAlt": "Alex Drlica-Wagner"
+  },
+  {
+    "name": "Johnny Greco",
+    "memberType": "collaborator",
+    "institution": "Princeton University"
+  },
+  {
+    "name": "John Moustakas",
+    "memberType": "collaborator",
+    "institution": "Siena College",
+    "url": "https://www.siena.edu/faculty-and-staff/person/john-moustakas/"
+  },
+  {
+    "name": "Masayuki Tanaka",
+    "memberType": "collaborator",
+    "institution": "NAOJ",
+    "url": "https://www2.nao.ac.jp/~masayuki/index.html"
+  },
+  {
+    "name": "Fangzhou Jiang",
+    "memberType": "collaborator",
+    "institution": "Peking University",
+    "url": "https://www.fzjiang.com/"
   }
 ]

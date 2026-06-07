@@ -2,26 +2,62 @@
 const { member } = Astro.props;
 
 const hasPhoto = typeof member.photoUrl === 'string' && member.photoUrl.length > 0;
+const surveys = Array.isArray(member.surveys) ? member.surveys : [];
+const hasSurveys = surveys.length > 0;
+const hasUrl = typeof member.url === 'string' && member.url.length > 0;
+const hasEmail = typeof member.email === 'string' && member.email.length > 0;
+const hasRole = typeof member.role === 'string' && member.role.length > 0;
 ---
 
-<article class="team-card">
-  <div class="team-card__photo" aria-label={member.photoAlt || 'Team member photo pending'}>
+<article class:list={['team-card', !hasSurveys && 'team-card--compact']}>
+  {
+    hasUrl ? (
+      <a class="team-card__photo" href={member.url} target="_blank" rel="noopener noreferrer" aria-label={`Open ${member.name} profile`}>
+        {
+          hasPhoto ? (
+            <img src={member.photoUrl} alt={member.photoAlt || `${member.name} portrait`} />
+          ) : (
+            <span>Photo pending</span>
+          )
+        }
+      </a>
+    ) : (
+      <div class="team-card__photo team-card__photo--static" aria-label={member.photoAlt || 'Team member photo pending'}>
+        {
+          hasPhoto ? (
+            <img src={member.photoUrl} alt={member.photoAlt || `${member.name} portrait`} />
+          ) : (
+            <span>Photo pending</span>
+          )
+        }
+      </div>
+    )
+  }
+  <div class="team-card__body">
+    <div class="team-card__info">
+      <h3>
+        {
+          hasUrl ? (
+            <a class="team-card__name-link" href={member.url} target="_blank" rel="noopener noreferrer">{member.name}</a>
+          ) : (
+            member.name
+          )
+        }
+      </h3>
+      <p>{member.institution}</p>
+      {
+        hasEmail && (
+          <a class="team-card__email" href={`mailto:${member.email}`}>{member.email}</a>
+        )
+      }
+    </div>
     {
-      hasPhoto ? (
-        <img src={member.photoUrl} alt={member.photoAlt || `${member.name} portrait`} />
-      ) : (
-        <span>Photo pending</span>
+      hasSurveys && (
+        <div class="tag-row" aria-label="Survey affiliation">
+          {surveys.map((survey) => <span class="tag">{survey}</span>)}
+        </div>
       )
     }
-  </div>
-  <div class="team-card__body">
-    <div>
-      <p class="team-card__role">{member.role}</p>
-      <h3>{member.name}</h3>
-      <p>{member.institution}</p>
-    </div>
-    <div class="tag-row" aria-label="Survey affiliation">
-      {member.surveys.map((survey) => <span class="tag">{survey}</span>)}
-    </div>
+    {hasRole && <p class="team-card__role">{member.role}</p>}
   </div>
 </article>

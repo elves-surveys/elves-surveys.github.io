@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 64" width="340" height="64" role="img">
+  <title>ELVES Surveys — adaptive logo (auto light/dark)</title>
+  <desc>ELVES Surveys horizontal logo with spiral galaxy, auto-switches light/dark.</desc>
+  <defs>
+    <style>
+      :root {
+        --c-host:     #1a2540;
+        --c-arm1:     #1a2540;
+        --c-arm2:     #3a6090;
+        --c-sat-a:    #3a6090;
+        --c-sat-b:    #7aaad0;
+        --c-boundary: #7aaad0;
+        --c-rule:     #c8d4e4;
+        --c-wm-main:  #1a2540;
+        --c-wm-sub:   #3a6090;
+        --c-bg:       transparent;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --c-host:     #9abce0;
+          --c-arm1:     #9abce0;
+          --c-arm2:     #6a8fc0;
+          --c-sat-a:    #6a8fc0;
+          --c-sat-b:    #4a6888;
+          --c-boundary: #2e4f72;
+          --c-rule:     #1e3050;
+          --c-wm-main:  #e8ecf4;
+          --c-wm-sub:   #6a8fc0;
+          --c-bg:       #0e1520;
+        }
+      }
+      .arm1 { stroke: var(--c-arm1); }
+      .arm2 { stroke: var(--c-arm2); }
+      .nuc  { fill: var(--c-host); }
+      .sa   { fill: var(--c-sat-a); }
+      .sb   { fill: var(--c-sat-b); }
+    </style>
+  </defs>
+  <rect width="340" height="64" fill="var(--c-bg)"/>
+  <g transform="translate(32,32)">
+    <circle cx="0" cy="0" r="26" fill="none" stroke="var(--c-boundary)" stroke-width="2.2" stroke-dasharray="2.5 3"/>
+    <g transform="rotate(-30)">
+      <path d="M 0.22,0.00 C 0.23,0.05 0.23,0.11 0.22,0.18 C 0.19,0.24 0.14,0.30 0.08,0.35 C -0.00,0.38 -0.10,0.40 -0.20,0.40 C -0.31,0.38 -0.42,0.32 -0.52,0.24 C -0.60,0.13 -0.67,-0.01 -0.70,-0.17 C -0.70,-0.35 -0.65,-0.54 -0.56,-0.73 C -0.41,-0.90 -0.21,-1.05 0.03,-1.16 C 0.31,-1.22 0.62,-1.21 0.95,-1.12 C 1.27,-0.95 1.57,-0.70 1.83,-0.36 C 2.01,0.06 2.11,0.56 2.09,1.10 C 1.94,1.66 1.64,2.22 1.19,2.74 C 0.60,3.18 -0.14,3.50 -1.00,3.65 C -1.93,3.61 -2.91,3.34 -3.88,2.82" fill="none" class="arm1" stroke-width="1.2" stroke-linecap="round"/>
+      <path d="M -0.22,0.00 C -0.23,-0.05 -0.23,-0.11 -0.22,-0.18 C -0.19,-0.24 -0.14,-0.30 -0.08,-0.35 C 0.00,-0.38 0.10,-0.40 0.20,-0.40 C 0.31,-0.38 0.42,-0.32 0.52,-0.24 C 0.60,-0.13 0.67,0.01 0.70,0.17 C 0.70,0.35 0.65,0.54 0.56,0.73 C 0.41,0.90 0.21,1.05 -0.03,1.16 C -0.31,1.22 -0.62,1.21 -0.95,1.12 C -1.27,0.95 -1.57,0.70 -1.83,0.36 C -2.01,-0.06 -2.11,-0.56 -2.09,-1.10 C -1.94,-1.66 -1.64,-2.22 -1.19,-2.74 C -0.60,-3.18 0.14,-3.50 1.00,-3.65 C 1.93,-3.61 2.91,-3.34 3.88,-2.82" fill="none" class="arm2" stroke-width="1.2" stroke-linecap="round"/>
+      <ellipse cx="0" cy="0" rx="1.1" ry="0.7" class="nuc" stroke="none"/>
+    </g>
+    <circle cx="-11" cy="-5"  r="3.1" class="sa"/>
+    <circle cx="4"   cy="-9"  r="2.0" class="sa"/>
+    <circle cx="-6"  cy="7"   r="1.8" class="sa"/>
+    <circle cx="10"  cy="4"   r="1.5" class="sb"/>
+    <circle cx="3"   cy="11"  r="1.4" class="sb"/>
+    <circle cx="-14" cy="2.5" r="1.6" class="sa"/>
+    <circle cx="-16" cy="-9"  r="1.5" class="sa"/>
+    <circle cx="-7"  cy="-12" r="1.2" class="sb"/>
+    <circle cx="-18" cy="-3"  r="1.1" class="sb"/>
+    <circle cx="19"  cy="-10" r="1.2" class="sb"/>
+    <circle cx="22"  cy="7"   r="1.0" class="sb"/>
+    <circle cx="-22" cy="11"  r="1.1" class="sb"/>
+    <circle cx="11"  cy="-19" r="0.9" class="sb"/>
+    <circle cx="-9"  cy="20"  r="0.9" class="sb"/>
+    <circle cx="25"  cy="-2"  r="0.75" class="sb"/>
+    <circle cx="-25" cy="-5"  r="0.75" class="sb"/>
+    <circle cx="15"  cy="19"  r="0.7" class="sb"/>
+    <circle cx="-19" cy="19"  r="0.7" class="sb"/>
+  </g>
+  <line x1="74" y1="31" x2="318" y2="31" stroke="var(--c-rule)" stroke-width="0.7" fill="none"/>
+  <text x="74" y="26" font-family="'SF Pro Display','Helvetica Neue',Helvetica,Arial,sans-serif" font-size="26" font-weight="400" letter-spacing="6" fill="var(--c-wm-main)">ELVES</text>
+  <text x="76" y="46" font-family="'SF Pro Display','Helvetica Neue',Helvetica,Arial,sans-serif" font-size="12" font-weight="400" letter-spacing="5" fill="var(--c-wm-sub)">SURVEYS</text>
+</svg>

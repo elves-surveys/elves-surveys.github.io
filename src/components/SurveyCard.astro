@@ -1,25 +1,38 @@
 ---
 const { survey } = Astro.props;
+
+const surveyMetrics = [
+  survey.num_hosts && { label: 'Hosts', value: survey.num_hosts },
+  survey.num_confirmed_satellites && {
+    label: 'Satellites',
+    value: survey.num_confirmed_satellites
+  },
+  survey.num_dwarfs && { label: 'Field dwarfs', value: survey.num_dwarfs }
+].filter(Boolean);
 ---
 
-<article class="survey-card">
+<article class:list={['survey-card', `survey-card--${survey.slug}`]}>
   <div class="survey-card__body">
     <p class="eyebrow">{survey.kicker}</p>
     <h3>{survey.name}</h3>
     <p>{survey.tagline}</p>
   </div>
+  {
+    surveyMetrics.length > 0 && (
+      <div class="survey-card__stats" aria-label={`${survey.name} sample counts`}>
+        {surveyMetrics.map((metric) => (
+          <div class="stat-chip">
+            <strong data-countup data-countup-target={metric.value}>{metric.value}</strong>
+            <span>{metric.label}</span>
+          </div>
+        ))}
+      </div>
+    )
+  }
   <dl class="compact-meta">
     <div>
       <dt>Host type</dt>
       <dd>{survey.hostGalaxyType}</dd>
-    </div>
-    <div>
-      <dt>Distance regime</dt>
-      <dd>{survey.distanceRegime}</dd>
-    </div>
-    <div>
-      <dt>Data release</dt>
-      <dd class="pending">{survey.dataReleaseStatus}</dd>
     </div>
   </dl>
   <div class="survey-card__actions">

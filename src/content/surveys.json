@@ -8,7 +8,8 @@
     "description": "ELVES is a survey of satellite systems around Milky Way-mass hosts in the Local Volume.",
     "hostGalaxyType": "Milky Way-mass host galaxies",
     "distanceRegime": "Local Volume",
-    "dataReleaseStatus": "[Data release pending]",
+    "num_hosts": 30,
+    "num_confirmed_satellites": 338,
     "overview": [
       "ELVES targets the satellite populations of Milky Way-mass host galaxies in the Local Volume.",
       "This page will collect the survey description, associated papers, public catalogs, imaging products, distance measurements, and citation guidance."
@@ -33,7 +34,8 @@
     "description": "ELVES-Dwarf is a survey of satellite systems around dwarf hosts in the Local Volume.",
     "hostGalaxyType": "Dwarf host galaxies",
     "distanceRegime": "Local Volume",
-    "dataReleaseStatus": "[Data release pending]",
+    "num_hosts": 39,
+    "num_confirmed_satellites": 32,
     "overview": [
       "ELVES-Dwarf extends the ELVES survey family to satellite systems around dwarf host galaxies in the Local Volume.",
       "This page will host the survey description, candidate catalogs, distance products, footprint and completeness products, imaging cutouts, papers, and citation guidance."
@@ -58,7 +60,7 @@
     "description": "ELVES-Field is a survey of dwarf galaxies in the Local Volume field.",
     "hostGalaxyType": "Field dwarf galaxies",
     "distanceRegime": "Local Volume",
-    "dataReleaseStatus": "[Data release pending]",
+    "num_dwarfs": 53,
     "overview": [
       "ELVES-Field focuses on dwarf galaxies in the Local Volume field.",
       "This page will collect the field dwarf catalog, distance measurements, imaging products, papers, data access notes, and citation guidance."
