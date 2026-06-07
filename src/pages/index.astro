@@ -29,8 +29,8 @@ import dataProducts from '../content/data-products.json';
 
   <section class="page-section" id="surveys" aria-labelledby="surveys-heading">
     <div class="section-heading">
-      <p class="eyebrow">Survey family</p>
-      <h2 id="surveys-heading">Three Local Volume Samples of Dwarf Galaxies</h2>
+      <p class="eyebrow">ELVES Surveys Family</p>
+      <h2 id="surveys-heading" style="font-size: 1.75rem;">Three Local Volume Samples of Dwarf Galaxies</h2>
     </div>
     <div class="survey-grid">
       {surveys.map((survey) => <SurveyCard survey={survey} />)}
@@ -51,17 +51,86 @@ import dataProducts from '../content/data-products.json';
     <div class="contact-panel">
       <div class="contact-panel__heading">
         <p class="eyebrow">Citation</p>
-        <h2 id="contact-heading">Contact and citation</h2>
+        <h2 id="contact-heading">Contact and Citation</h2>
       </div>
       <div class="contact-panel__body">
         <p>
-          If you use data products from these surveys, please cite the core survey paper and/or relevant science papers. 
+          If you use data products from these surveys, please cite the core survey paper and/or relevant science papers.
           If you have questions about the data, please contact the survey team via email.
         </p>
+
+        {(() => {
+          const keyPapers = [
+            { label: 'ELVES', paper: papers.find(p => p.id === 'elves-carlsten2022')! },
+            { label: 'ELVES-Dwarf', paper: papers.find(p => p.id === 'elves-dwarf-paper1')! },
+            { label: 'ELVES-Field', paper: papers.find(p => p.id === 'elves-field-sample-paper')! },
+          ];
+          return (
+            <div class="citation-tabs" id="citation-tabs">
+              <div class="citation-tabs__buttons" role="tablist" aria-label="Survey citations">
+                {keyPapers.map(({ label }, i) => (
+                  <button
+                    class="citation-tab-btn"
+                    role="tab"
+                    aria-selected={i === 0 ? 'true' : 'false'}
+                    aria-controls={`bibtex-panel-${i}`}
+                    id={`bibtex-tab-${i}`}
+                    data-tab-index={i}
+                  >{label}</button>
+                ))}
+              </div>
+              {keyPapers.map(({ paper }, i) => (
+                <div
+                  class="citation-tabs__panel"
+                  role="tabpanel"
+                  id={`bibtex-panel-${i}`}
+                  aria-labelledby={`bibtex-tab-${i}`}
+                  hidden={i !== 0}
+                >
+                  <p class="citation-tabs__note">{paper.citationNote}</p>
+                  <div class="bibtex-block">
+                    <pre class="bibtex-pre"><code>{paper.bibtex}</code></pre>
+                    <button class="bibtex-copy-btn" data-bibtex={paper.bibtex} aria-label="Copy BibTeX">Copy</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          );
+        })()}
+
         <a class="text-link" href="/team/">View the survey team</a>
       </div>
     </div>
   </section>
+
+  <script>
+    (() => {
+      const tabs = document.querySelectorAll<HTMLButtonElement>('.citation-tab-btn');
+      const panels = document.querySelectorAll<HTMLElement>('.citation-tabs__panel');
+
+      tabs.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const idx = Number(btn.dataset.tabIndex);
+          tabs.forEach((t, i) => t.setAttribute('aria-selected', i === idx ? 'true' : 'false'));
+          panels.forEach((p, i) => { p.hidden = i !== idx; });
+        });
+      });
+
+      document.querySelectorAll<HTMLButtonElement>('.bibtex-copy-btn').forEach((btn) => {
+        btn.addEventListener('click', async () => {
+          const text = btn.dataset.bibtex ?? '';
+          try {
+            await navigator.clipboard.writeText(text);
+            btn.textContent = 'Copied!';
+            setTimeout(() => { btn.textContent = 'Copy'; }, 1800);
+          } catch {
+            btn.textContent = 'Copy failed';
+            setTimeout(() => { btn.textContent = 'Copy'; }, 1800);
+          }
+        });
+      });
+    })();
+  </script>
 
   <script>
     (() => {

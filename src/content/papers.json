@@ -10,7 +10,8 @@
     "adsLink": "https://ui.adsabs.harvard.edu/abs/2022ApJ...933...47C",
     "doiLink": "https://doi.org/10.3847/1538-4357/ac6fd7",
     "citationNote": "Carlsten et al. 2022, ApJ, 933, 47",
-    "citationCount": 167
+    "citationCount": 167,
+    "bibtex": "@ARTICLE{Carlsten2022,\n  author  = {{Carlsten}, Scott G. and {Greene}, Jenny E. and\n             {Beaton}, Rachael L. and {Danieli}, Shany and {Greco}, Johnny P.},\n  title   = \"{The Exploration of Local VolumE Satellites (ELVES) Survey:\n              A Nearly Volume-limited Sample of Nearby Dwarf Satellite Systems}\",\n  journal = {\\apj},\n  year    = 2022,\n  volume  = {933},\n  pages   = {47},\n  doi     = {10.3847/1538-4357/ac6fd7}\n}"
   },
   {
     "id": "elves-mass-size",
@@ -101,7 +102,8 @@
     "adsLink": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1002...75L",
     "doiLink": "https://doi.org/10.3847/1538-4357/ae4495",
     "citationNote": "Li et al. 2026, ApJ, 1002, 75",
-    "citationCount": 17
+    "citationCount": 17,
+    "bibtex": "@ARTICLE{Li2026,\n  author  = {{Li}, Jiaxuan and {Greene}, Jenny E. and {Danieli}, Shany and\n             {Carlsten}, Scott G. and {Geha}, Marla and {Jiang}, Fangzhou and\n             {Tanaka}, Masayuki},\n  title   = \"{ELVES-Dwarf. I. Satellite Systems of Eight Isolated Dwarf\n              Galaxies in the Local Volume}\",\n  journal = {\\apj},\n  year    = 2026,\n  volume  = {1002},\n  pages   = {75},\n  doi     = {10.3847/1538-4357/ae4495}\n}"
   },
   {
     "id": "elves-dwarf-ddo161",
@@ -127,7 +129,8 @@
     "adsLink": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1001..244C",
     "doiLink": "https://doi.org/10.3847/1538-4357/ae4c5c",
     "citationNote": "Carlsten et al. 2026, ApJ, 1001, 244",
-    "citationCount": 0
+    "citationCount": 0,
+    "bibtex": "@ARTICLE{Carlsten2026field,\n  author  = {{Carlsten}, Scott G. and {Li}, Jiaxuan and {Greene}, Jenny E. and\n             {Drlica-Wagner}, Alex and {Danieli}, Shany},\n  title   = \"{A Sample of Nearby Isolated Dwarf Galaxies: A First Look at\n              the Mass Function of Field Dwarfs}\",\n  journal = {\\apj},\n  year    = 2026,\n  volume  = {1001},\n  pages   = {244},\n  doi     = {10.3847/1538-4357/ae4c5c}\n}"
   },
   {
     "id": "elves-field-quenching",
