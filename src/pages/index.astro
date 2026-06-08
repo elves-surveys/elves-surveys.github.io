@@ -1,11 +1,34 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import DataProducts from '../components/DataProducts.astro';
 import PaperList from '../components/PaperList.astro';
 import SurveyCard from '../components/SurveyCard.astro';
+import AcronymReveal from '../components/AcronymReveal.astro';
+import LocalVolumeMap from '../components/LocalVolumeMap.astro';
 import surveys from '../content/surveys.json';
 import papers from '../content/papers.json';
-import dataProducts from '../content/data-products.json';
+
+const featuredPapers = papers.filter((paper) => paper.featured);
+
+const dataAccessCards = [
+  {
+    name: 'ELVES',
+    description: 'Data products for Milky Way-mass host satellite systems.',
+    href: '/elves/#data',
+    buttonLabel: 'Open ELVES data'
+  },
+  {
+    name: 'ELVES-Dwarf',
+    description: 'Data products for dwarf-host satellite systems.',
+    href: '/elves-dwarf/#data',
+    buttonLabel: 'Open ELVES-Dwarf data'
+  },
+  {
+    name: 'ELVES-Field',
+    description: 'Data products for isolated field dwarfs.',
+    href: '/elves-field/#data',
+    buttonLabel: 'Open ELVES-Field data'
+  }
+];
 ---
 
 <BaseLayout
@@ -14,17 +37,18 @@ import dataProducts from '../content/data-products.json';
 >
   <section class="hero hero--home">
     <div class="hero__content hero__content--compact">
-      <p class="eyebrow">Exploration of Local VolumE Surveys (ELVES)</p>
-      <h1 style="font-size: 4em; max-width: 20ch;">The <span style="font-family: sans-serif;">ELVES</span> Surveys</h1>
+      <h1 style="font-size: 3em; max-width: 20ch;">The <span style="font-family: sans-serif;">ELVES</span> Surveys</h1>
+      <AcronymReveal />
       <p class="hero__lede" style="font-size: 0.95rem;">
-        Exploration of Local VolumE Surveys (ELVES) is a coordinated family of surveys characterizing the dwarf-galaxy populations around
+        A coordinated family of surveys characterizing the dwarf-galaxy populations around
         Milky Way analogs (<em>ELVES</em>), around dwarf hosts (<em>ELVES-Dwarf</em>), and in the field (<em>ELVES-Field</em>). 
       </p>
       <div class="hero__actions">
         <a class="button" href="#surveys">Browse surveys</a>
-        <a class="button button--secondary" href="#data-products">View data products</a>
+        <a class="button button--secondary" href="#data-access">View data products</a>
       </div>
     </div>
+    <LocalVolumeMap />
   </section>
 
   <section class="page-section" id="surveys" aria-labelledby="surveys-heading">
@@ -37,15 +61,42 @@ import dataProducts from '../content/data-products.json';
     </div>
   </section>
 
-  <section class="page-section" aria-labelledby="papers-heading">
-    <div class="section-heading">
-      <p class="eyebrow">Papers</p>
-      <h2 id="papers-heading">Key papers</h2>
+  <section class="page-section" aria-labelledby="featured-papers-heading">
+    <div class="section-heading section-heading--split">
+      <div>
+        <p class="eyebrow">Papers</p>
+        <h2 id="featured-papers-heading">Featured papers</h2>
+      </div>
+      <a class="button button--secondary" href="/papers/">View all papers</a>
     </div>
-    <PaperList papers={papers} filterable />
+    <PaperList papers={featuredPapers} />
   </section>
 
-  <DataProducts products={dataProducts} />
+  <section class="page-section page-section--compact" id="data-access" aria-labelledby="data-access-heading">
+    <div class="data-access">
+      <div class="section-heading section-heading--compact">
+        <p class="eyebrow">Data</p>
+        <h2 id="data-access-heading">Data access</h2>
+        <p>
+          Public catalogs and documentation are organized by survey. Each survey page includes the relevant catalogs,
+          distance measurements, imaging products, completeness information, and citation guidance.
+        </p>
+      </div>
+      <div class="data-access-grid">
+        {
+          dataAccessCards.map((card) => (
+            <article class="data-access-card">
+              <div>
+                <h3>{card.name}</h3>
+                <p>{card.description}</p>
+              </div>
+              <a class="button button--secondary" href={card.href}>{card.buttonLabel}</a>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
 
   <section class="page-section page-section--compact" aria-labelledby="contact-heading">
     <div class="contact-panel">

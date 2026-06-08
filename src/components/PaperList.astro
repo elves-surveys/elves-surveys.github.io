@@ -13,6 +13,17 @@ const surveyLabel = (slug) => {
 };
 
 const surveyOptions = ['elves', 'elves-dwarf', 'elves-field'];
+const paperTypeOptions = [
+  { value: 'official', label: 'Official ELVES papers' },
+  { value: 'related', label: 'Related papers' }
+];
+const paperTypeLabel = (type) => {
+  const labels = {
+    official: 'Official',
+    related: 'Related'
+  };
+  return labels[type] || 'Official';
+};
 const hasCitationCount = (value) => typeof value === 'number' && Number.isFinite(value);
 const citationCountLabel = (value) => `${value} citation${value === 1 ? '' : 's'}`;
 ---
@@ -20,22 +31,43 @@ const citationCountLabel = (value) => `${value} citation${value === 1 ? '' : 's'
 <div class:list={['paper-list-shell', filterable && 'paper-list-shell--filterable']} data-paper-list-filterable={filterable ? 'true' : undefined}>
   {
     filterable && (
-      <div class="paper-filter" role="group" aria-label="Filter key papers by survey">
-        <button class="paper-filter__button paper-filter__button--active" type="button" data-paper-filter="all" aria-pressed="true">
-          All
-        </button>
-        {
-          surveyOptions.map((survey) => (
-            <button
-              class:list={['paper-filter__button', `tag--survey-${survey}`]}
-              type="button"
-              data-paper-filter={survey}
-              aria-pressed="false"
-            >
-              {surveyLabel(survey)}
-            </button>
-          ))
-        }
+      <div class="paper-filter-panel" aria-label="Paper filters">
+        <div class="paper-filter" role="group" aria-label="Filter papers by survey">
+          <span class="paper-filter__label">Survey</span>
+          <button class="paper-filter__button paper-filter__button--active" type="button" data-paper-survey-filter="all" aria-pressed="true">
+            All
+          </button>
+          {
+            surveyOptions.map((survey) => (
+              <button
+                class:list={['paper-filter__button', `tag--survey-${survey}`]}
+                type="button"
+                data-paper-survey-filter={survey}
+                aria-pressed="false"
+              >
+                {surveyLabel(survey)}
+              </button>
+            ))
+          }
+        </div>
+        <div class="paper-filter" role="group" aria-label="Filter papers by paper type">
+          <span class="paper-filter__label">Paper type</span>
+          <button class="paper-filter__button paper-filter__button--active" type="button" data-paper-type-filter="all" aria-pressed="true">
+            All
+          </button>
+          {
+            paperTypeOptions.map((type) => (
+              <button
+                class:list={['paper-filter__button', `paper-type-filter--${type.value}`]}
+                type="button"
+                data-paper-type-filter={type.value}
+                aria-pressed="false"
+              >
+                {type.label}
+              </button>
+            ))
+          }
+        </div>
       </div>
     )
   }
@@ -45,7 +77,7 @@ const citationCountLabel = (value) => `${value} citation${value === 1 ? '' : 's'
       <p class="muted">[Paper entries pending]</p>
     ) : (
       papers.map((paper) => (
-        <article class="paper-card" data-paper-card data-surveys={(paper.surveys || []).join(' ')}>
+        <article class="paper-card" data-paper-card data-surveys={(paper.surveys || []).join(' ')} data-paper-type={paper.paperType || 'official'}>
           <div class="paper-card__header">
             <div>
               <h3>
@@ -68,6 +100,9 @@ const citationCountLabel = (value) => `${value} citation${value === 1 ? '' : 's'
             <div class="paper-card__meta">
               <div class="paper-card__citation-row">
                 <p class="citation-note">{displayValue(paper.citationNote, '[Citation note pending]')}</p>
+                <span class:list={['paper-type-badge', `paper-type-badge--${paper.paperType || 'official'}`]}>
+                  {paperTypeLabel(paper.paperType || 'official')}
+                </span>
                 {
                   hasCitationCount(paper.citationCount) && (
                     <span class="paper-card__metric">{citationCountLabel(paper.citationCount)}</span>
@@ -104,6 +139,7 @@ const citationCountLabel = (value) => `${value} citation${value === 1 ? '' : 's'
     )
   }
   </div>
+  <p class="paper-list-empty" data-paper-list-empty hidden>No papers match the selected filters.</p>
 </div>
 
 <script>
@@ -111,24 +147,51 @@ const citationCountLabel = (value) => `${value} citation${value === 1 ? '' : 's'
     const paperListRoots = document.querySelectorAll('[data-paper-list-filterable="true"]');
 
     paperListRoots.forEach((root) => {
-      const filterButtons = Array.from(root.querySelectorAll('[data-paper-filter]'));
+      const surveyFilterButtons = Array.from(root.querySelectorAll('[data-paper-survey-filter]'));
+      const typeFilterButtons = Array.from(root.querySelectorAll('[data-paper-type-filter]'));
       const paperCards = Array.from(root.querySelectorAll('[data-paper-card]'));
+      const emptyState = root.querySelector('[data-paper-list-empty]');
+      let selectedSurvey = 'all';
+      let selectedType = 'all';
 
-      const setFilter = (selectedSurvey) => {
-        filterButtons.forEach((button) => {
-          const isActive = button.dataset.paperFilter === selectedSurvey;
+      const updateButtons = (buttons, key, selectedValue) => {
+        buttons.forEach((button) => {
+          const isActive = button.dataset[key] === selectedValue;
           button.classList.toggle('paper-filter__button--active', isActive);
           button.setAttribute('aria-pressed', String(isActive));
         });
+      };
+
+      const applyFilters = () => {
+        updateButtons(surveyFilterButtons, 'paperSurveyFilter', selectedSurvey);
+        updateButtons(typeFilterButtons, 'paperTypeFilter', selectedType);
+        let visibleCount = 0;
 
         paperCards.forEach((card) => {
           const surveys = (card.dataset.surveys || '').split(' ').filter(Boolean);
-          card.hidden = selectedSurvey !== 'all' && !surveys.includes(selectedSurvey);
+          const type = card.dataset.paperType || 'official';
+          const surveyMatches = selectedSurvey === 'all' || surveys.includes(selectedSurvey);
+          const typeMatches = selectedType === 'all' || type === selectedType;
+          const isVisible = surveyMatches && typeMatches;
+          card.hidden = !isVisible;
+          if (isVisible) visibleCount += 1;
         });
+
+        if (emptyState) emptyState.hidden = visibleCount !== 0;
       };
 
-      filterButtons.forEach((button) => {
-        button.addEventListener('click', () => setFilter(button.dataset.paperFilter || 'all'));
+      surveyFilterButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          selectedSurvey = button.dataset.paperSurveyFilter || 'all';
+          applyFilters();
+        });
+      });
+
+      typeFilterButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          selectedType = button.dataset.paperTypeFilter || 'all';
+          applyFilters();
+        });
       });
     });
   })();

@@ -1,0 +1,133 @@
+---
+// Adjust the survey group coordinates and node sizes here.
+const elvesGroups = [
+  {
+    cx: 214,
+    cy: 218,
+    halo: 70,
+    core: 11,
+    satellites: [
+      [168, 195, 3.4], [181, 244, 2.8], [196, 174, 3.1], [205, 268, 2.7],
+      [224, 165, 2.9], [236, 247, 3.2], [250, 203, 2.7], [262, 226, 3.1],
+      [176, 220, 2.5], [224, 292, 2.4], [282, 188, 2.5], [151, 233, 2.4],
+      [240, 185, 2.4], [190, 292, 2.2]
+    ]
+  },
+  {
+    cx: 388,
+    cy: 334,
+    halo: 65,
+    core: 10,
+    satellites: [
+      [340, 314, 3.1], [352, 366, 2.5], [373, 282, 2.8], [398, 284, 2.4],
+      [420, 316, 2.9], [438, 352, 2.5], [390, 388, 2.8], [356, 342, 2.4],
+      [440, 296, 2.2], [410, 372, 2.4], [330, 350, 2.2], [372, 364, 2.1]
+    ]
+  }
+];
+
+const dwarfGroups = [
+  {
+    cx: 166,
+    cy: 390,
+    halo: 38,
+    core: 4.6,
+    satellites: [[139, 374, 2.4], [153, 417, 2.1], [181, 361, 2.1], [195, 397, 2.2]]
+  },
+  {
+    cx: 430,
+    cy: 180,
+    halo: 36,
+    core: 4.4,
+    satellites: [[404, 166, 2.2], [422, 211, 2.1], [452, 157, 2.1], [462, 188, 2]]
+  },
+  {
+    cx: 310,
+    cy: 444,
+    halo: 33,
+    core: 4.2,
+    satellites: [[286, 431, 2.1], [321, 416, 2], [336, 456, 2.1]]
+  }
+];
+
+const fieldDwarfs = [
+  [132, 160, 3.2], [305, 132, 3], [486, 246, 3.3], [498, 402, 3],
+  [242, 388, 2.8], [105, 320, 2.9], [355, 520, 3.2], [461, 494, 2.8],
+  [262, 95, 2.7], [522, 306, 2.9], [118, 468, 2.8], [378, 210, 2.7],
+  [218, 498, 2.9], [455, 112, 2.6]
+];
+
+// Background galaxies are decorative context only; keep them out of the legend.
+const backgroundPoints = [
+  [94, 250, 1.7], [152, 112, 1.5], [282, 196, 1.4], [354, 112, 1.6],
+  [516, 170, 1.4], [546, 376, 1.7], [432, 454, 1.4], [188, 522, 1.6],
+  [72, 388, 1.4], [312, 558, 1.5], [214, 118, 1.3], [548, 270, 1.5],
+  [392, 92, 1.3], [86, 182, 1.4], [506, 462, 1.4], [148, 504, 1.3]
+];
+---
+
+<figure class="local-volume-map" aria-labelledby="local-volume-map-title">
+  <svg
+    class="local-volume-map__svg"
+    viewBox="0 0 600 600"
+    role="img"
+    aria-labelledby="local-volume-map-title local-volume-map-desc"
+  >
+    <title id="local-volume-map-title">Stylized Local Volume map of the ELVES survey family</title>
+    <desc id="local-volume-map-desc">
+      A schematic circular Local Volume containing dense Milky Way-mass host environments for ELVES,
+      lower-mass dwarf-host environments for ELVES-Dwarf, and isolated field dwarfs for ELVES-Field.
+    </desc>
+    <defs>
+      <radialGradient id="local-volume-glow" cx="50%" cy="45%" r="56%">
+        <stop offset="0%" stop-color="#eef5ff" stop-opacity="0.72" />
+        <stop offset="72%" stop-color="#ffffff" stop-opacity="0.12" />
+        <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+      </radialGradient>
+    </defs>
+
+    <circle class="map-volume-fill" cx="300" cy="300" r="260" aria-hidden="true" />
+    <circle class="map-volume-boundary" cx="300" cy="300" r="260" aria-hidden="true" />
+    <text class="map-volume-label" x="300" y="20" text-anchor="middle" aria-hidden="true">Local Volume</text>
+
+    <g class="map-context" aria-hidden="true">
+      {backgroundPoints.map(([cx, cy, r]) => <circle class="map-background-point" cx={cx} cy={cy} r={r} />)}
+    </g>
+
+    <g class="map-layer map-layer-elves" aria-hidden="true">
+      {elvesGroups.map((group) => (
+        <g class="map-group map-node-elves">
+          <circle class="map-halo" cx={group.cx} cy={group.cy} r={group.halo} />
+          <circle class="map-host map-host-elves" cx={group.cx} cy={group.cy} r={group.core} />
+          {group.satellites.map(([cx, cy, r]) => (
+            <circle class="map-satellite map-satellite-elves" cx={cx} cy={cy} r={r} />
+          ))}
+        </g>
+      ))}
+    </g>
+
+    <g class="map-layer map-layer-dwarf" aria-hidden="true">
+      {dwarfGroups.map((group) => (
+        <g class="map-group map-node-dwarf">
+          <circle class="map-halo" cx={group.cx} cy={group.cy} r={group.halo} />
+          <circle class="map-host map-host-dwarf" cx={group.cx} cy={group.cy} r={group.core} />
+          {group.satellites.map(([cx, cy, r]) => (
+            <circle class="map-satellite map-satellite-dwarf" cx={cx} cy={cy} r={r} />
+          ))}
+        </g>
+      ))}
+    </g>
+
+    <g class="map-layer map-layer-field" aria-hidden="true">
+      {fieldDwarfs.map(([cx, cy, r]) => (
+        <circle class="map-node-field" cx={cx} cy={cy} r={r} />
+      ))}
+    </g>
+  </svg>
+
+  <figcaption class="local-volume-map__legend">
+    <span><i class="legend-dot legend-dot--elves"></i><em>MW-mass hosts</em></span>
+    <span><i class="legend-dot legend-dot--dwarf"></i><em>Dwarf hosts</em></span>
+    <span><i class="legend-dot legend-dot--field"></i><em>Field dwarfs</em></span>
+  </figcaption>
+</figure>

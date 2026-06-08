@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PaperList from '../../components/PaperList.astro';
+import papers from '../../content/papers.json';
+---
+
+<BaseLayout
+  title="Papers | ELVES Surveys"
+  description="Filtered bibliography for the ELVES, ELVES-Dwarf, and ELVES-Field survey family."
+>
+  <section class="hero hero--survey">
+    <div class="survey-hero__copy">
+      <p class="eyebrow">Bibliography</p>
+      <h1>Papers</h1>
+      <p class="hero__lede">
+        This bibliography includes official ELVES survey papers as well as related follow-up studies that use ELVES
+        data products, target ELVES systems, or build on ELVES discoveries.
+      </p>
+    </div>
+  </section>
+
+  <section class="page-section page-section--after-compact-hero" aria-labelledby="papers-heading">
+    <div class="section-heading">
+      <p class="eyebrow">All papers</p>
+      <h2 id="papers-heading">Filtered bibliography</h2>
+    </div>
+    <PaperList papers={papers} filterable />
+  </section>
+</BaseLayout>
